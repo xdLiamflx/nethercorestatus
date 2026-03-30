@@ -1,0 +1,44 @@
+<div id="server-status-container" style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(135deg, #0b0b0b 0%, #1a001a 50%, #0b0b0b 100%); color:white; font-family:sans-serif;">
+  <div style="background: rgba(0,0,0,0.8); padding:20px; border-radius:16px; text-align:center; box-shadow: 0 0 25px rgba(140, 0, 255, 0.6); max-width:300px; word-wrap:break-word;">
+    <img id="server-icon" src="https://api.mcsrvstat.us/icon/play.nether-core.com" alt="Server Icon" style="width:64px; height:64px; margin-bottom:10px;">
+    
+    <h2>Nether Core</h2>
+    
+    <p id="server-ip" style="font-size:12px; color:#bbb; margin-bottom:6px; font-family:monospace;">play.nether-core.com</p>
+    
+    <p id="status">Loading...</p>
+    
+    <p id="players" style="font-size:13px; color:#aaa; margin-top:4px;"></p>
+    <p id="version" style="font-size:12px; color:#888; margin-top:2px;">Game Version 1.21.11</p>
+  </div>
+</div>
+
+<script>
+async function updateStatus() {
+  const status = document.getElementById("status");
+  const players = document.getElementById("players");
+  const icon = document.getElementById("server-icon");
+
+  try {
+    const res = await fetch("https://api.mcsrvstat.us/2/play.nether-core.com");
+    const data = await res.json();
+
+    icon.src = "https://api.mcsrvstat.us/icon/play.nether-core.com";
+
+    if (data.online) {
+      status.innerHTML = "<span style='color:#00ff88;'>● Online</span>";
+      players.innerText = `${data.players.online} / ${data.players.max} players`;
+    } else {
+      status.innerHTML = "<span style='color:#ff4444;'>● Offline</span>";
+      players.innerText = "";
+    }
+
+  } catch (e) {
+    status.innerHTML = "<span style='color:#ff4444;'>● Offline</span>";
+    players.innerText = "";
+  }
+}
+
+updateStatus();
+setInterval(updateStatus, 10000);
+</script>
