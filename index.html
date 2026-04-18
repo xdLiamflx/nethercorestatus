@@ -1,6 +1,6 @@
 <div id="server-status-container">
   <div id="server-card">
-    <img id="server-icon" src="https://api.mcsrvstat.us/icon/play.nether-core.com" alt="Server Icon">
+    <img id="server-icon" src="https://creatorlabs.net/wp-content/uploads/2023/12/wither.gif" alt="Wither Icon">
     
     <h1>Nether Core</h1>
     
@@ -18,7 +18,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* FIXES SCROLL ISSUE */
+  overflow: hidden;
   font-family: sans-serif;
 }
 
@@ -37,13 +37,17 @@ html, body {
   border-radius: 24px;
   text-align: center;
   box-shadow: 0 0 40px rgba(140, 0, 255, 0.7);
-  width: 420px; /* BIGGER CARD */
+  width: 420px;
 }
 
+/* UPDATED GIF STYLING */
 #server-icon {
-  width: 96px;
-  height: 96px;
-  margin-bottom: 15px;
+  width: 140px;          /* slightly bigger for a GIF centerpiece */
+  height: 140px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(140, 0, 255, 0.8);
 }
 
 h1 {
@@ -84,13 +88,10 @@ h1 {
 async function updateStatus() {
   const status = document.getElementById("status");
   const players = document.getElementById("players");
-  const icon = document.getElementById("server-icon");
 
   try {
     const res = await fetch("https://api.mcsrvstat.us/2/play.nether-core.com");
     const data = await res.json();
-
-    icon.src = "https://api.mcsrvstat.us/icon/play.nether-core.com";
 
     if (data.online) {
       status.innerHTML = "<span style='color:#00ff88;'>● Online</span>";
