@@ -38,21 +38,45 @@ html, body {
   text-align: center;
   width: 420px;
 
-  /* STRONGER GLOW HERE */
-  box-shadow:
-    0 0 30px rgba(140, 0, 255, 0.8),
-    0 0 60px rgba(140, 0, 255, 0.6),
-    0 0 90px rgba(140, 0, 255, 0.4);
+  /* PULSING GLOW */
+  animation: pulseGlow 2.8s ease-in-out infinite;
+}
+
+/* GLOW ANIMATION */
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 20px rgba(140, 0, 255, 0.5),
+      0 0 40px rgba(140, 0, 255, 0.4),
+      0 0 60px rgba(140, 0, 255, 0.3);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 45px rgba(140, 0, 255, 0.9),
+      0 0 90px rgba(140, 0, 255, 0.7),
+      0 0 140px rgba(140, 0, 255, 0.5);
+    transform: scale(1.03);
+  }
+
+  100% {
+    box-shadow:
+      0 0 20px rgba(140, 0, 255, 0.5),
+      0 0 40px rgba(140, 0, 255, 0.4),
+      0 0 60px rgba(140, 0, 255, 0.3);
+    transform: scale(1);
+  }
 }
 
 /* CLEAN GIF — NO GLOW */
 #server-icon {
-  width: 160px;   /* bigger */
+  width: 160px;
   height: 160px;
   margin-bottom: 18px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: none; /* removed glow */
+  box-shadow: none;
 }
 
 h1 {
