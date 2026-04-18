@@ -1,6 +1,4 @@
 <div id="server-status-container">
-  <div id="glow"></div>
-
   <div id="server-card">
     <img id="server-icon" src="https://creatorlabs.net/wp-content/uploads/2023/12/wither.gif" alt="Wither Icon">
     
@@ -25,62 +23,57 @@ html, body {
 }
 
 #server-status-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #0b0b0b 0%, #1a001a 50%, #0b0b0b 100%);
+  color: white;
 }
 
-/* 🔥 GLOW ELEMENT (this is what pulses) */
-#glow {
-  position: absolute;
-  width: 460px;
-  height: 460px;
-  background: radial-gradient(circle, rgba(140,0,255,0.8) 0%, rgba(140,0,255,0.4) 40%, transparent 70%);
-  filter: blur(40px);
-  border-radius: 50%;
-  z-index: 0;
-
-  animation: pulse 2.5s ease-in-out infinite;
-}
-
-/* 💥 ANIMATION */
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.4;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.4;
-  }
-}
-
-/* CARD */
 #server-card {
-  position: relative;
-  z-index: 1;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.85);
   padding: 40px;
   border-radius: 24px;
   text-align: center;
   width: 420px;
-  color: white;
+
+  /* 🔥 PULSING GLOW */
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
-/* ICON */
+/* 🔥 ANIMATION */
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 30px rgba(140, 0, 255, 0.6),
+      0 0 60px rgba(140, 0, 255, 0.4),
+      0 0 90px rgba(140, 0, 255, 0.3);
+  }
+
+  50% {
+    box-shadow:
+      0 0 55px rgba(140, 0, 255, 1),
+      0 0 110px rgba(140, 0, 255, 0.8),
+      0 0 160px rgba(140, 0, 255, 0.6);
+  }
+
+  100% {
+    box-shadow:
+      0 0 30px rgba(140, 0, 255, 0.6),
+      0 0 60px rgba(140, 0, 255, 0.4),
+      0 0 90px rgba(140, 0, 255, 0.3);
+  }
+}
+
+/* CLEAN GIF — NO GLOW */
 #server-icon {
   width: 160px;
   height: 160px;
   margin-bottom: 18px;
   border-radius: 12px;
   object-fit: cover;
+  box-shadow: none;
 }
 
 h1 {
