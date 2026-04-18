@@ -1,17 +1,84 @@
-<div id="server-status-container" style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(135deg, #0b0b0b 0%, #1a001a 50%, #0b0b0b 100%); color:white; font-family:sans-serif;">
-  <div style="background: rgba(0,0,0,0.8); padding:20px; border-radius:16px; text-align:center; box-shadow: 0 0 25px rgba(140, 0, 255, 0.6); max-width:300px; word-wrap:break-word;">
-    <img id="server-icon" src="https://api.mcsrvstat.us/icon/play.nether-core.com" alt="Server Icon" style="width:64px; height:64px; margin-bottom:10px;">
+<div id="server-status-container">
+  <div id="server-card">
+    <img id="server-icon" src="https://api.mcsrvstat.us/icon/play.nether-core.com" alt="Server Icon">
     
-    <h2>Nether Core</h2>
+    <h1>Nether Core</h1>
     
-    <p id="server-ip" style="font-size:12px; color:#bbb; margin-bottom:6px; font-family:monospace;">To Join: play.nether-core.com</p>
+    <p id="server-ip">play.nether-core.com</p>
     
     <p id="status">Loading...</p>
     
-    <p id="players" style="font-size:13px; color:#aaa; margin-top:4px;"></p>
-    <p id="version" style="font-size:12px; color:#888; margin-top:2px;">Game Version 1.21.11</p>
+    <p id="players"></p>
+    <p id="version">Game Version 1.21.11</p>
   </div>
 </div>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* FIXES SCROLL ISSUE */
+  font-family: sans-serif;
+}
+
+#server-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0b0b0b 0%, #1a001a 50%, #0b0b0b 100%);
+  color: white;
+}
+
+#server-card {
+  background: rgba(0,0,0,0.85);
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(140, 0, 255, 0.7);
+  width: 420px; /* BIGGER CARD */
+}
+
+#server-icon {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 32px;
+}
+
+#server-ip {
+  font-size: 16px;
+  color: #bbb;
+  margin-bottom: 10px;
+  font-family: monospace;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+#status {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+#players {
+  font-size: 16px;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+#version {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+}
+</style>
 
 <script>
 async function updateStatus() {
@@ -27,7 +94,7 @@ async function updateStatus() {
 
     if (data.online) {
       status.innerHTML = "<span style='color:#00ff88;'>● Online</span>";
-      players.innerText = `${data.players.online} / ${data.players.max} players`;
+      players.innerText = `${data.players.online} / ${data.players.max} players online`;
     } else {
       status.innerHTML = "<span style='color:#ff4444;'>● Offline</span>";
       players.innerText = "";
